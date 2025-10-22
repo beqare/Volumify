@@ -19,8 +19,8 @@ const EQ_PRESETS = {
 const ALLOWED_PRESETS = new Set([...Object.keys(EQ_PRESETS), "custom"]);
 
 const tabStates = new Map();
-const BADGE_COLOR_ENABLED = "#399c83ff";
-const BADGE_COLOR_DISABLED = "#181a1bff";
+const BADGE_COLOR_ENABLED = [57, 156, 131, 255];
+const BADGE_COLOR_DISABLED = [24, 26, 27, 255];
 
 function clampValue(value, min, max) {
   return Math.min(Math.max(value, min), max);

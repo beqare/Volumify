@@ -239,6 +239,8 @@
   function handleReset() {
     state.gain = DEFAULT_STATE.gain;
     state.enabled = true;
+    state.eq = { ...DEFAULT_STATE.eq };
+    state.preset = 'default';
     applyStateToUi();
     pushState();
   }
