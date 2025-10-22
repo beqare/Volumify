@@ -55,7 +55,7 @@ h1 {
   color: #9aa3bc;
 }
 
-section {
+.card {
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -66,12 +66,41 @@ section {
     0 18px 30px rgba(8, 9, 14, 0.4);
 }
 
+.card.eq {
+  gap: 18px;
+}
+
 label {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: #9aa3bc;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.preset {
+  background: rgba(35, 40, 57, 0.75);
+  border: 1px solid rgba(86, 95, 122, 0.45);
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: #f8f9fa;
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.preset:hover {
+  border-color: rgba(119, 128, 156, 0.6);
+  background: rgba(49, 56, 78, 0.85);
 }
 
 .value-row {
@@ -91,6 +120,33 @@ label {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.eq-band {
+  display: grid;
+  grid-template-columns: 52px 1fr 60px;
+  align-items: center;
+  gap: 12px;
+}
+
+.eq-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #d1d8ec;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.eq-value {
+  justify-self: end;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9aa3bc;
+  font-variant-numeric: tabular-nums;
+}
+
+.eq-slider {
+  --slider-fill: 50%;
 }
 
 input[type="range"] {
