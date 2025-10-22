@@ -21,7 +21,14 @@
   }
 
   function updateSliderLabel() {
-    valueLabel.textContent = formatPercent(slider.value);
+    const numericValue = clamp(Number(slider.value), 0, 1000);
+    valueLabel.textContent = formatPercent(numericValue);
+  }
+
+  function updateSliderVisual() {
+    const numericValue = clamp(Number(slider.value), 0, 1000);
+    const percent = numericValue / 10;
+    slider.style.setProperty('--slider-fill', `${percent}%`);
   }
 
   function updateButtonView(isEnabled) {
@@ -54,6 +61,7 @@
     const numericValue = Number(event.target.value);
     state.gain = clamp(numericValue, 0, 1000) / 100;
     updateSliderLabel();
+    updateSliderVisual();
     pushState();
   }
 
@@ -117,6 +125,7 @@
     const sliderValue = clamp(Math.round(state.gain * 100), 0, 1000);
     slider.value = String(sliderValue);
     updateSliderLabel();
+    updateSliderVisual();
     updateButtonView(state.enabled);
   }
 

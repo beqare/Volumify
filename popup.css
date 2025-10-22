@@ -4,99 +4,169 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: #111;
-  background: #f7f9fb;
-  min-width: 260px;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  color: #f8f9fa;
+  background: radial-gradient(circle at top, #1f2233, #0f111a);
+  min-width: 280px;
 }
 
 main {
-  padding: 16px;
+  padding: 18px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 h1 {
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .power {
-  padding: 6px 14px;
+  padding: 8px 18px;
   border-radius: 999px;
-  border: none;
-  font-size: 12px;
-  font-weight: 600;
+  border: 1px solid transparent;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .power--on {
-  background: #1f8a70;
-  color: #fff;
+  background: #2bb673;
+  color: #061410;
 }
 
 .power--off {
-  background: #adb5bd;
-  color: #1a1a1a;
+  background: transparent;
+  border-color: #394156;
+  color: #9aa3bc;
 }
 
 section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(15, 17, 26, 0.6);
+  box-shadow: inset 0 0 0 1px rgba(86, 95, 122, 0.18),
+    0 18px 30px rgba(8, 9, 14, 0.4);
 }
 
 label {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  color: #495057;
+  letter-spacing: 0.12em;
+  color: #9aa3bc;
+}
+
+.value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#volumeValue {
+  font-size: 26px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #f4f6ff;
 }
 
 .slider-row {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 12px;
 }
 
 input[type="range"] {
-  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+      90deg,
+      #2bb673 0%,
+      #2bb673 var(--slider-fill, 100%),
+      #252a3b var(--slider-fill, 100%),
+      #252a3b 100%
+    );
+  outline: none;
+  transition: opacity 0.2s ease;
 }
 
-#volumeValue {
-  min-width: 52px;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-size: 13px;
-  color: #212529;
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f8f9fa;
+  border: 3px solid #1f2233;
+  box-shadow: 0 4px 12px rgba(9, 11, 18, 0.4);
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f8f9fa;
+  border: 3px solid #1f2233;
+  box-shadow: 0 4px 12px rgba(9, 11, 18, 0.4);
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #252a3b;
+}
+
+input[type="range"]::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: #2bb673;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
 }
 
 .reset {
-  margin-top: 4px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: none;
-  background: #dee2e6;
-  color: #212529;
-  font-size: 12px;
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(86, 95, 122, 0.45);
+  background: rgba(35, 40, 57, 0.75);
+  color: #d1d8ec;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .reset:hover {
-  background: #ced4da;
+  background: rgba(49, 56, 78, 0.85);
+  border-color: rgba(119, 128, 156, 0.6);
+  color: #f8f9fa;
 }
