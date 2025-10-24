@@ -28,7 +28,7 @@
       "run_at": "document_idle"
     }
   ],
-  "homepage_url": "https://jonasgrimm.de/volumify",
+  "homepage_url": "https://jonasgrimm.de",
   "author": "Jonas Grimm",
   "minimum_chrome_version": "115"
 }
