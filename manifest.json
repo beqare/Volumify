@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "Volumify",
-  "description": "Increase or decrease the current tab's volume up to 1000% and toggle the effect on or off as needed.",
-  "version": "1.0.0",
-  "permissions": ["storage", "tabs", "scripting"],
+  "description": "Boost or reduce tab volume up to 1000% and fine-tune sound with EQ presets.",
+  "version": "1.0.1",
+  "permissions": ["tabs"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
@@ -27,5 +27,8 @@
       "js": ["content.js"],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "homepage_url": "https://jonasgrimm.de/volumify",
+  "author": "Jonas Grimm",
+  "minimum_chrome_version": "115"
 }

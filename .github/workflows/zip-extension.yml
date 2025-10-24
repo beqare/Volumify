@@ -1,0 +1,32 @@
+name: Build Chrome Extension ZIP
+
+on:
+  push:
+    branches:
+      - main # oder dein Branch-Name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create ZIP file
+        run: |
+          mkdir -p build
+          zip -r build/Volumify.zip \
+            background.js \
+            content.js \
+            manifest.json \
+            popup.html \
+            popup.js \
+            popup.css \
+            icons
+
+      - name: Upload ZIP as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Volumify-extension
+          path: build/Volumify.zip
