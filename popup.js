@@ -1,18 +1,18 @@
 (() => {
-  const slider = document.getElementById('volumeSlider');
-  const valueLabel = document.getElementById('volumeValue');
-  const powerButton = document.getElementById('powerButton');
-  const resetButton = document.getElementById('resetButton');
-  const presetSelect = document.getElementById('eqPreset');
+  const slider = document.getElementById("volumeSlider");
+  const valueLabel = document.getElementById("volumeValue");
+  const powerButton = document.getElementById("powerButton");
+  const resetButton = document.getElementById("resetButton");
+  const presetSelect = document.getElementById("eqPreset");
   const eqSliders = {
-    low: document.getElementById('eqLow'),
-    mid: document.getElementById('eqMid'),
-    high: document.getElementById('eqHigh')
+    low: document.getElementById("eqLow"),
+    mid: document.getElementById("eqMid"),
+    high: document.getElementById("eqHigh"),
   };
   const eqValueLabels = {
-    low: document.getElementById('eqLowValue'),
-    mid: document.getElementById('eqMidValue'),
-    high: document.getElementById('eqHighValue')
+    low: document.getElementById("eqLowValue"),
+    mid: document.getElementById("eqMidValue"),
+    high: document.getElementById("eqHighValue"),
   };
 
   const DEFAULT_STATE = {
@@ -21,18 +21,18 @@
     eq: {
       low: 0,
       mid: 0,
-      high: 0
+      high: 0,
     },
-    preset: 'default'
+    preset: "default",
   };
   const EQ_RANGE = { min: -12, max: 12 };
-  const EQ_KEYS = ['low', 'mid', 'high'];
-  const PRESET_KEYS = ['default', 'bassBoost', 'vocalBoost'];
-  const PRESET_SET = new Set([...PRESET_KEYS, 'custom']);
+  const EQ_KEYS = ["low", "mid", "high"];
+  const PRESET_KEYS = ["default", "bassBoost", "vocalBoost"];
+  const PRESET_SET = new Set([...PRESET_KEYS, "custom"]);
   const EQ_PRESETS = {
     default: { low: 0, mid: 0, high: 0 },
     bassBoost: { low: 8, mid: 2, high: 4 },
-    vocalBoost: { low: -2, mid: 5, high: 6 }
+    vocalBoost: { low: -2, mid: 5, high: 6 },
   };
 
   let currentTabId = null;
@@ -56,19 +56,24 @@
         return key;
       }
     }
-    return 'custom';
+    return "custom";
   }
 
   function createState(partial = {}) {
     const gainValue =
-      typeof partial.gain === 'number' ? partial.gain : DEFAULT_STATE.gain;
+      typeof partial.gain === "number" ? partial.gain : DEFAULT_STATE.gain;
 
     const next = {
       gain: clamp(gainValue, 0, 10),
       enabled:
-        typeof partial.enabled === 'boolean' ? partial.enabled : DEFAULT_STATE.enabled,
+        typeof partial.enabled === "boolean"
+          ? partial.enabled
+          : DEFAULT_STATE.enabled,
       eq: {},
-      preset: typeof partial.preset === 'string' ? partial.preset : DEFAULT_STATE.preset
+      preset:
+        typeof partial.preset === "string"
+          ? partial.preset
+          : DEFAULT_STATE.preset,
     };
 
     for (const band of EQ_KEYS) {
@@ -78,7 +83,10 @@
     }
 
     const inferredPreset = computePresetForEq(next.eq);
-    if (!PRESET_SET.has(next.preset) || (next.preset !== 'custom' && next.preset !== inferredPreset)) {
+    if (
+      !PRESET_SET.has(next.preset) ||
+      (next.preset !== "custom" && next.preset !== inferredPreset)
+    ) {
       next.preset = inferredPreset;
     }
 
@@ -91,7 +99,7 @@
 
   function formatEqValue(value) {
     const rounded = Math.round(value);
-    const sign = rounded > 0 ? '+' : '';
+    const sign = rounded > 0 ? "+" : "";
     return `${sign}${rounded} dB`;
   }
 
@@ -103,20 +111,20 @@
   function updateVolumeSliderVisual() {
     const numericValue = clamp(Number(slider.value), 0, 1000);
     const percent = numericValue / 10;
-    slider.style.setProperty('--slider-fill', `${percent}%`);
+    slider.style.setProperty("--slider-fill", `${percent}%`);
   }
 
   function updateButtonView(isEnabled) {
-    powerButton.classList.toggle('power--on', isEnabled);
-    powerButton.classList.toggle('power--off', !isEnabled);
-    powerButton.textContent = isEnabled ? 'On' : 'Off';
+    powerButton.classList.toggle("power--on", isEnabled);
+    powerButton.classList.toggle("power--off", !isEnabled);
+    powerButton.textContent = isEnabled ? "On" : "Off";
   }
 
   function updatePresetSelect(presetKey) {
     if (!presetSelect) {
       return;
     }
-    const normalized = PRESET_SET.has(presetKey) ? presetKey : 'custom';
+    const normalized = PRESET_SET.has(presetKey) ? presetKey : "custom";
     presetSelect.value = normalized;
   }
 
@@ -131,7 +139,7 @@
     sliderElement.value = String(clamped);
     const percent =
       ((clamped - EQ_RANGE.min) / (EQ_RANGE.max - EQ_RANGE.min)) * 100;
-    sliderElement.style.setProperty('--slider-fill', `${percent}%`);
+    sliderElement.style.setProperty("--slider-fill", `${percent}%`);
 
     if (labelElement) {
       labelElement.textContent = formatEqValue(clamped);
@@ -155,12 +163,12 @@
   }
 
   function pushState() {
-    if (typeof currentTabId !== 'number') {
+    if (typeof currentTabId !== "number") {
       return;
     }
 
     const eqPayload = buildEqPayload();
-    if (state.preset !== 'custom') {
+    if (state.preset !== "custom") {
       state.preset = computePresetForEq(state.eq);
     } else if (!PRESET_SET.has(state.preset)) {
       state.preset = computePresetForEq(state.eq);
@@ -168,12 +176,12 @@
 
     chrome.runtime.sendMessage(
       {
-        type: 'volumify:updateSettings',
+        type: "volumify:updateSettings",
         tabId: currentTabId,
         gain: state.gain,
         enabled: state.enabled,
         eq: eqPayload,
-        preset: state.preset
+        preset: state.preset,
       },
       () => {
         if (chrome.runtime.lastError) {
@@ -211,8 +219,8 @@
       return;
     }
 
-    if (selected === 'custom') {
-      state.preset = 'custom';
+    if (selected === "custom") {
+      state.preset = "custom";
       updatePresetSelect(state.preset);
       pushState();
       return;
@@ -240,7 +248,7 @@
     state.gain = DEFAULT_STATE.gain;
     state.enabled = true;
     state.eq = { ...DEFAULT_STATE.eq };
-    state.preset = 'default';
+    state.preset = "default";
     applyStateToUi();
     pushState();
   }
@@ -256,15 +264,15 @@
   async function restoreState() {
     try {
       currentTabId = await resolveActiveTabId();
-      if (typeof currentTabId !== 'number') {
+      if (typeof currentTabId !== "number") {
         return;
       }
 
       const response = await new Promise((resolve) => {
         chrome.runtime.sendMessage(
           {
-            type: 'volumify:getSettings',
-            tabId: currentTabId
+            type: "volumify:getSettings",
+            tabId: currentTabId,
           },
           (result) => {
             if (chrome.runtime.lastError) {
@@ -300,12 +308,12 @@
     await restoreState();
     applyStateToUi();
 
-    slider.addEventListener('input', handleSliderInput);
-    powerButton.addEventListener('click', handlePowerToggle);
-    resetButton?.addEventListener('click', handleReset);
-    presetSelect?.addEventListener('change', handlePresetChange);
+    slider.addEventListener("input", handleSliderInput);
+    powerButton.addEventListener("click", handlePowerToggle);
+    resetButton?.addEventListener("click", handleReset);
+    presetSelect?.addEventListener("change", handlePresetChange);
     for (const band of EQ_KEYS) {
-      eqSliders[band]?.addEventListener('input', (event) =>
+      eqSliders[band]?.addEventListener("input", (event) =>
         handleEqSliderInput(band, event)
       );
     }

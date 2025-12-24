@@ -3,7 +3,7 @@
   "name": "Volumify",
   "description": "Boost or reduce tab volume up to 1000% and fine-tune sound with EQ presets.",
   "version": "1.0.1",
-  "permissions": ["tabs"],
+  "permissions": [],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
