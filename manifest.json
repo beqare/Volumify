@@ -2,9 +2,10 @@
   "manifest_version": 3,
   "name": "Volumify",
   "description": "Boost or reduce tab volume up to 1000% and fine-tune sound with EQ presets.",
-  "version": "1.0.1",
-  "permissions": [],
-  "host_permissions": ["<all_urls>"],
+  "version": "1.0.3",
+  "permissions": [
+    "activeTab"
+  ],
   "background": {
     "service_worker": "background.js"
   },
@@ -21,13 +22,6 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "run_at": "document_idle"
-    }
-  ],
   "homepage_url": "https://jonasgrimm.de",
   "author": "Jonas Grimm",
   "minimum_chrome_version": "115"
